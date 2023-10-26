@@ -1,0 +1,25 @@
+[project]
+name = "langchain-example"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "yuanbohan", email = "yuanbo.han@gmail.com" }
+]
+dependencies = [
+    "langchain>=0.0.27",
+    "openai>=0.28.1",
+    "Flask>=3.0.0",
+    "greptimeai>=0.1.2",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.rye.scripts]
+app = { cmd = "python src/langchain/app.py" }
