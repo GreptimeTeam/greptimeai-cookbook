@@ -14,10 +14,10 @@ TODO(yuanbohan): update when greptimeai service is ready
 
 ```shell
 export OPENAI_API_KEY=sk-xxx
-export GREPTIME_LLM_HOST=xxx
-export GREPTIME_LLM_DATABASE=xxx
-export GREPTIME_LLM_USERNAME=xxx
-export GREPTIME_LLM_PASSWORD=xxx
+export GREPTIMEAI_HOST=xxx
+export GREPTIMEAI_DATABASE=xxx
+export GREPTIMEAI_USERNAME=xxx
+export GREPTIMEAI_PASSWORD=xxx
 ```
 - Running Flask
 
