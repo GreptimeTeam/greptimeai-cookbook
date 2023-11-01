@@ -1,24 +1,29 @@
 # langchain-example
 
-TODO(yuanbohan): update when greptimeai service is ready
+TODO(yuanbohan): update greptimeai link when it is ready
 
 ## Prerequisites
 
 - [rye][rye]
 - [OpenAI API KEY][openai]
-- [GreptimeCloud Service][greptimeai]
+- [GreptimeAI Service][greptimeai]
 
 ## Quick Start
 
-- Export environment
+- Export OpenAI environment
 
 ```shell
-export OPENAI_API_KEY=sk-xxx
-export GREPTIMEAI_HOST=xxx
-export GREPTIMEAI_DATABASE=xxx
-export GREPTIMEAI_USERNAME=xxx
-export GREPTIMEAI_PASSWORD=xxx
+export OPENAI_API_KEY='sk-xxx'
 ```
+
+- Export GreptimeAI environment
+
+```shell
+export GREPTIMEAI_HOST='xxx'
+export GREPTIMEAI_DATABASE='xxx'
+export GREPTIMEAI_TOKEN='xxx'
+```
+
 - Running Flask
 
 ```shell
