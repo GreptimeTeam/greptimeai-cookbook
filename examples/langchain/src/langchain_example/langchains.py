@@ -19,19 +19,20 @@ from langchain.schema import SystemMessage
 logging.basicConfig(level=logging.DEBUG)
 
 # setup LangChain
-greptime_callback = GreptimeCallbackHandler()
+callbacks = [GreptimeCallbackHandler()]
 
 llm_chain = LLMChain(
     llm=OpenAI(),
     prompt=PromptTemplate.from_template("{text}"),
-    callbacks=[greptime_callback],
+    callbacks=callbacks,
 )
 
 stream_llm_chain = LLMChain(
     llm=OpenAI(streaming=True),
     prompt=PromptTemplate.from_template("{text}"),
-    callbacks=[greptime_callback],
+    callbacks=callbacks,
 )
+
 
 TEMPLATE = "You are a helpful assistant"
 system_message_prompt = SystemMessagePromptTemplate.from_template(TEMPLATE)
@@ -45,7 +46,7 @@ chat_prompt = ChatPromptTemplate.from_messages(
 chat_chain = LLMChain(
     llm=ChatOpenAI(),
     prompt=chat_prompt,
-    callbacks=[greptime_callback],
+    callbacks=callbacks,
 )
 
 
