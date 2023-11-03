@@ -40,7 +40,7 @@ docker run --rm -p 8000:8000 -e OPENAI_API_KEY='sk-xxx' \
 -e GREPTIMEAI_HOST='xxx' \
 -e GREPTIMEAI_DATABASE='xxx' \
 -e GREPTIMEAI_TOKEN='xxx' \
-greptime/greptimeai-langchain:latest
+greptime/greptimeai-langchain-example:latest
 ```
 ## Visit Flask
 
