@@ -26,11 +26,22 @@ export GREPTIMEAI_TOKEN='xxx'
 
 - Running Flask
 
+running by rye
 ```shell
 rye sync
 rye run app
 ```
 
+running by docker
+```
+docker build -t greptime/greptimeai-langchain:latest .
+
+docker run -p 8000:8000 -e OPENAI_API_KEY='sk-xxx' \
+-e GREPTIMEAI_HOST='xxx' \
+-e GREPTIMEAI_DATABASE='xxx' \
+-e GREPTIMEAI_TOKEN='xxx' \
+greptime/greptimeai-langchain:latest
+```
 ## Visit Flask
 
 Flask will listen on :8000, and you can use cURL to try:
