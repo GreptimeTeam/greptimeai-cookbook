@@ -22,4 +22,4 @@ dev-dependencies = []
 allow-direct-references = true
 
 [tool.rye.scripts]
-app = { cmd = "python src/langchain/app.py" }
+app = { cmd = "python src/langchain_example/app.py" }
