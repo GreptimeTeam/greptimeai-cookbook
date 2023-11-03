@@ -1,9 +1,8 @@
 FROM python:3.11.6-slim
 WORKDIR /app
 
-COPY ./pyproject.toml .
+COPY ./pyproject.toml ./src/ ./
 RUN pip install .
-COPY ./src/langchain/ .
 EXPOSE 8000
 
-CMD ["python", "app.py"]
+CMD ["python", "langchain/app.py"]

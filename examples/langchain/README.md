@@ -34,9 +34,9 @@ rye run app
 
 running by docker
 ```
-docker build -t greptime/greptimeai-langchain:latest .
+docker build -t greptime/greptimeai-langchain-example:latest .
 
-docker run -p 8000:8000 -e OPENAI_API_KEY='sk-xxx' \
+docker run --rm -p 8000:8000 -e OPENAI_API_KEY='sk-xxx' \
 -e GREPTIMEAI_HOST='xxx' \
 -e GREPTIMEAI_DATABASE='xxx' \
 -e GREPTIMEAI_TOKEN='xxx' \
