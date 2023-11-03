@@ -2,7 +2,7 @@ FROM python:3.11.6-slim
 WORKDIR /app
 
 COPY ./pyproject.toml .
-RUN pip install . -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install .
 COPY ./src/langchain/ .
 EXPOSE 8000
 
