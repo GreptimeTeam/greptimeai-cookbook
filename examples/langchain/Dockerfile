@@ -5,4 +5,4 @@ COPY ./pyproject.toml ./src/ ./
 RUN pip install .
 EXPOSE 8000
 
-CMD ["python", "langchain/app.py"]
+CMD ["python", "langchain_example/app.py"]
