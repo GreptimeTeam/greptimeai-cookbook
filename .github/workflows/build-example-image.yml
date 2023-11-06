@@ -42,7 +42,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: examples/${{ github.event.inputs.example }}
           file: examples/${{ github.event.inputs.example }}/Dockerfile
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
