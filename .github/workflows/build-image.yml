@@ -5,6 +5,10 @@ run-name: publish packages by @${{ github.actor }}
 on:
   workflow_dispatch:
     inputs:
+      image_tag:
+        description: 'image tag'
+        default: 'latest'
+        required: true
       example:
         description: 'choose which example'
         required: true
@@ -37,6 +41,9 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: greptime/greptimeai-${{ github.event.inputs.example }}-example
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ github.event.inputs.image_tag }}
 
       - name: Build and push Docker image
         id: build-and-push
