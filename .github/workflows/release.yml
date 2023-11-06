@@ -1,11 +1,17 @@
-name: Release
+name: Build Image for Examples
+
 run-name: publish packages by @${{ github.actor }}
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
-
+  workflow_dispatch:
+    inputs:
+      example:
+        description: 'choose which example'
+        required: true
+        type: choice
+        options:
+          - langchain
+          - openai
 
 jobs:
   release:
@@ -26,24 +32,18 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Configure release title
-        shell: bash
-        run: |
-          title=${{ github.event.release.name }}
-          echo "TITLE=${title}" >> $GITHUB_ENV
-
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: greptime/greptimeai-${{ env.TITLE }}-example
+          images: greptime/greptimeai-${{ github.event.inputs.example }}-example
 
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: examples/${{ env.TITLE }}/Dockerfile
+          file: examples/${{ github.event.inputs.example }}/Dockerfile
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: ${{ steps.meta.outputs.tags }}
