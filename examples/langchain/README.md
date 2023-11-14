@@ -4,7 +4,7 @@ TODO(yuanbohan): update greptimeai link when it is ready
 
 ## Prerequisites
 
-- [rye][rye]
+- [rye][rye] or docker
 - [OpenAI API KEY][openai]
 - [GreptimeAI Service][greptimeai]
 
@@ -34,7 +34,6 @@ rye run app
 
 running by docker
 ```
-docker build -t greptime/greptimeai-langchain-example:latest .
 
 docker run --rm -p 8000:8000 -e OPENAI_API_KEY='sk-xxx' \
 -e GREPTIMEAI_HOST='xxx' \
@@ -48,12 +47,12 @@ Flask will listen on :8000, and you can use cURL to try:
 
 - chat
 ```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/chat -d '{"message":"give me a baby name", "user_id": "111"}'
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/chat -d '{"message":"give me a baby name", "user_id": "111", "streaming": False}'
 ```
 
 - llm
 ```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/llm -d '{"message":"give me a joke", "user_id": "222"}'
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/llm -d '{"message":"give me a joke", "user_id": "222", "streaming": False}'
 ```
 
 - agent
@@ -61,14 +60,9 @@ curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain
 curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/agent -d '{"message":"how many letters in the word open-source", "user_id": "333"}'
 ```
 
-- streaming
-```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/streaming -d '{"message":"give me a joke", "user_id": "444"}'
-```
-
 ## Visit GreptimeAI Dashboard
 
-TODO(yuanbohan): more information here: link, capture, etc.
+Visit [greptimeai][greptimeai] and navigate to dashboard to expolore the traces, analytics, etc.
 
 [rye]: https://rye-up.com/guide/installation/
 [greptimeai]: https://console.greptime.cloud/ai
