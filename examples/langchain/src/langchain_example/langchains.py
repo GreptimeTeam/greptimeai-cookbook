@@ -1,6 +1,6 @@
 import logging
 
-from greptimeai.langchain.callback import GreptimeCallbackHandler
+from greptimeai.langchain_callback import GreptimeCallbackHandler
 
 from langchain.agents import AgentExecutor, OpenAIFunctionsAgent, tool
 from langchain.chains import LLMChain
