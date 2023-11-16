@@ -1,0 +1,25 @@
+[project]
+name = "openai-example"
+version = "0.1.0"
+description = "example to instrument openai via greptimeai"
+authors = [
+    { name = "Yuanbo Han", email = "yuanbo.han@gmail.com" }
+]
+dependencies = [
+    "openai>=1.2.4",
+    "Flask>=3.0.0",
+    "greptimeai @ git+https://github.com/GreptimeTeam/greptimeai@instrument-openai-chat-completion",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+license = { text = "MIT" }
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.rye.scripts]
+app = { cmd = "python src/openai_example/app.py" }
