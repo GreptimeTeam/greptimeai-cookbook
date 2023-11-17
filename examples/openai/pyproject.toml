@@ -8,7 +8,7 @@ authors = [
 dependencies = [
     "openai>=1.2.4",
     "Flask>=3.0.0",
-    "greptimeai @ git+https://github.com/GreptimeTeam/greptimeai@instrument-openai-chat-completion",
+    "greptimeai @ git+https://github.com/GreptimeTeam/greptimeai@support-openai",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"

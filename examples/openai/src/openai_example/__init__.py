@@ -1,13 +1,13 @@
 import logging
 
-from greptimeai import setup_openai
+from greptimeai.tracker.openai_tracker import setup
 
 from openai import OpenAI
 
 logging.basicConfig(level=logging.DEBUG)
 
 client = OpenAI()
-setup_openai(client=client)
+setup(client=client)
 
 
 def chat_completion(message: str):
@@ -20,4 +20,4 @@ def chat_completion(message: str):
         ],
         model="gpt-3.5-turbo",
     )
-    return resp
+    return str(resp)
