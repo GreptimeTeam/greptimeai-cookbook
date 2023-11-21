@@ -1,7 +1,5 @@
 # langchain-example
 
-TODO(yuanbohan): update greptimeai link when it is ready
-
 ## Prerequisites
 
 - [rye][rye] or docker
@@ -62,7 +60,7 @@ curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain
 
 ## Visit GreptimeAI Dashboard
 
-Visit [greptimeai][greptimeai] and navigate to dashboard to expolore the traces, analytics, etc.
+Visit [greptimeai][greptimeai] and navigate to dashboard to explore the traces, analytics, etc.
 
 [rye]: https://rye-up.com/guide/installation/
 [greptimeai]: https://console.greptime.cloud/ai
