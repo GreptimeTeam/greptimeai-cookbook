@@ -10,7 +10,7 @@ client = OpenAI()
 setup(client=client)
 
 
-def chat_completion(message: str):
+def chat_completion(message: str, user_id: str):
     resp = client.chat.completions.create(
         messages=[
             {
@@ -19,5 +19,6 @@ def chat_completion(message: str):
             }
         ],
         model="gpt-3.5-turbo",
+        user=user_id,
     )
     return str(resp)

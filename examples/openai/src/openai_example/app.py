@@ -6,15 +6,12 @@ from openai_example import chat_completion
 
 
 @app.route("/openai/<scenario>", methods=["POST"])
-def langchain(scenario: str):
+def run(scenario: str):
     json = request.json
     message = json.get("message", "")
-    streaming = json.get("streaming", False)
-    if not isinstance(streaming, bool):
-        streaming = bool(streaming)
-    metadata = {"user_id": json.get("user_id", "")}
+    user_id = json.get("user_id", "")
 
-    return chat_completion(message)
+    return chat_completion(message, user_id)
 
 
 if __name__ == "__main__":
