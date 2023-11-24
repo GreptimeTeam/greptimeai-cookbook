@@ -34,9 +34,18 @@ rye run app
 
 Flask will listen on :8001, and you can use cURL to try:
 
-- chat completion
+#### chat completion
+
 ```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/chat -d '{"message":"give me a baby name", "user_id": "111"}'
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/chat -d '{"message":"give me a baby name", "user_id": "chat_completion_user"}'
+```
+
+#### audio
+
+- speech
+
+```shell
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/audio/speech -d '{"message":"how is everything going?", "user_id": "audio_speech_user"}'
 ```
 
 ## Visit GreptimeAI Dashboard
