@@ -13,15 +13,21 @@ from openai_example import (
 @app.route("/openai/chat", methods=["POST"])
 def chat():
     json = request.json
-    message = json.get("message", "")
-    user_id = json.get("user_id", "")
+    if not json:
+        return "No json body provided"
 
-    return chat_completion(message, user_id)
+    message: str = json.get("message", "")
+    user_id: str = json.get("user_id", "")
+    raw: bool = json.get("raw", False)
+
+    return chat_completion(message, user_id, raw)
 
 
 @app.route("/openai/audio/<scenario>", methods=["POST"])
 def audio(scenario: str):
     json = request.json
+    if not json:
+        return "No json body provided"
     message = json.get("message", "")
     user_id = json.get("user_id", "")
 
