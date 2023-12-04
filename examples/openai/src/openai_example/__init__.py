@@ -1,16 +1,9 @@
-import logging
-from pathlib import Path
-
-from greptimeai.tracker import openai as openai_tracker
+from greptimeai import openai_patcher
 
 import openai
 
-logging.basicConfig(level=logging.DEBUG)
-
 client = openai.OpenAI()
-openai_tracker.setup(client=client)
-
-_audio_filename = "audio_test.mp3"
+openai_patcher.setup(client=client)
 
 
 def chat_completion(message: str, user_id: str, raw: bool) -> str:
@@ -44,29 +37,6 @@ def audio_speech(message: str, user_id: str) -> str:
         extra_headers={"x-user-id": user_id},
     )
 
-    resp.stream_to_file(_audio_filename)
+    resp.stream_to_file("audio_test.mp3")
 
     return resp.text
-
-
-def audio_transcription(prompt: str, user_id: str) -> str:
-    resp = client.audio.transcriptions.create(
-        model="whisper-1",
-        file=Path(_audio_filename),
-        prompt=prompt,
-        language="en",
-        response_format="json",
-        extra_headers={"x-user-id": user_id},
-    )
-    return str(resp)
-
-
-def audio_translation(prompt: str, user_id: str) -> str:
-    resp = client.audio.translations.create(
-        model="whisper-1",
-        file=Path(_audio_filename),
-        prompt=prompt,
-        response_format="json",
-        extra_headers={"x-user-id": user_id},
-    )
-    return str(resp)
