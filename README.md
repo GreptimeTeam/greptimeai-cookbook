@@ -5,6 +5,7 @@ Examples and guides for using the GreptimeAI to instrument LLM Applications
 ## Examples
 
 - [langchain](./examples/langchain)
+- [openai](./examples/openai)
 
 ## Contributing
 

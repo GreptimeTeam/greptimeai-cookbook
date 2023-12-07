@@ -1,8 +1,11 @@
+import logging
+
 from greptimeai import openai_patcher
 
-import openai
+from openai import OpenAI
 
-client = openai.OpenAI()
+logging.basicConfig(level=logging.DEBUG)
+client = OpenAI()
 openai_patcher.setup(client=client)
 
 
@@ -25,6 +28,28 @@ def chat_completion(message: str, user_id: str, raw: bool) -> str:
     )
 
     return str(resp)
+
+
+def stream_chat(message: str, user_id: str) -> str:
+    stream = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": message,
+            }
+        ],
+        model="gpt-3.5-turbo",
+        user=user_id,
+        stream=True,
+    )
+
+    text = ""
+    for chunk in stream:
+        for choice in chunk.choices:
+            print(f"{ choice = }")
+            if choice.delta.content:
+                text += choice.delta.content
+    return text
 
 
 def audio_speech(message: str, user_id: str) -> str:
