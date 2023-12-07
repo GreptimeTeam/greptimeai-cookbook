@@ -1,4 +1,4 @@
-# langchain-example
+# openai-example
 
 ## Prerequisites
 
@@ -24,6 +24,8 @@ export GREPTIMEAI_TOKEN='xxx'
 
 - Running Flask
 
+running by rye
+
 ```shell
 rye sync
 rye run app
@@ -31,24 +33,24 @@ rye run app
 
 ## Visit Flask
 
-Flask will listen on :8000, and you can use cURL to try:
+Flask will listen on :8001, and you can use cURL to try:
 
-- chat
+### chat completion
 
 ```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/chat -d '{"message":"give me a baby name", "user_id": "111", "streaming": False}'
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/chat -d '{"message":"give me a baby name", "user_id": "chat_completion_user"}'
 ```
 
-- llm
+### chat completion stream
 
 ```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/llm -d '{"message":"give me a joke", "user_id": "222", "streaming": False}'
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/stream -d '{"message":"give me a baby name", "user_id": "chat_completion_stream_user"}'
 ```
 
-- agent
+### audio speech
 
 ```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/agent -d '{"message":"how many letters in the word open-source", "user_id": "333"}'
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/audio/speech -d '{"message":"how is everything going?", "user_id": "audio_speech_user"}'
 ```
 
 ## Visit GreptimeAI Dashboard
