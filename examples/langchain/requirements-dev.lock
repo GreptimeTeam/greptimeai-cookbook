@@ -23,7 +23,8 @@ deprecated==1.2.14
 flask==3.0.0
 frozenlist==1.4.0
 googleapis-common-protos==1.61.0
-greptimeai==0.1.11
+greenlet==3.0.2
+greptimeai==0.1.14
 idna==3.4
 importlib-metadata==6.8.0
 itsdangerous==2.1.2
