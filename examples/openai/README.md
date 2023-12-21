@@ -38,13 +38,7 @@ Flask will listen on :8001, and you can use cURL to try:
 ### chat completion
 
 ```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/chat -d '{"message":"give me a baby name", "user_id": "chat_completion_user"}'
-```
-
-### chat completion stream
-
-```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/stream -d '{"message":"give me a baby name", "user_id": "chat_completion_stream_user"}'
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/chat -d '{"message":"give me a baby name", "user_id": "chat_completion_user", "streaming": False}'
 ```
 
 ### audio speech
