@@ -1,3 +1,4 @@
+# docker build -t greptime/greptimeai-langchain-example:latest .
 FROM python:3.11.6-slim
 WORKDIR /app
 

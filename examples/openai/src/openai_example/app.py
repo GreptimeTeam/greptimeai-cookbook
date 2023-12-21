@@ -2,7 +2,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-from openai_example import audio_speech, chat_completion, stream_chat
+from openai_example import audio_speech, chat_completion
 
 
 @app.route("/openai/chat", methods=["POST"])
@@ -13,22 +13,9 @@ def chat():
 
     message: str = json.get("message", "")
     user_id: str = json.get("user_id", "")
-    raw: bool = json.get("raw", False)
+    streaming: bool = json.get("streaming", False)
 
-    return chat_completion(message, user_id, raw)
-
-
-@app.route("/openai/stream", methods=["POST"])
-def stream():
-    json = request.json
-    if not json:
-        return "No json body provided"
-
-    message: str = json.get("message", "")
-    user_id: str = json.get("user_id", "")
-    raw: bool = json.get("raw", False)
-
-    return stream_chat(message, user_id)
+    return chat_completion(message, user_id, streaming)
 
 
 @app.route("/openai/audio/speech", methods=["POST"])

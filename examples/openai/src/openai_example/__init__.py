@@ -9,29 +9,8 @@ client = OpenAI()
 openai_patcher.setup(client=client)
 
 
-def chat_completion(message: str, user_id: str, raw: bool) -> str:
-    kwargs = {
-        "messages": [
-            {
-                "role": "user",
-                "content": message,
-            }
-        ],
-        "model": "gpt-3.5-turbo",
-        "user": user_id,
-    }
-
-    resp = (
-        client.with_raw_response.chat.completions.create(**kwargs)
-        if raw
-        else client.chat.completions.create(**kwargs)
-    )
-
-    return str(resp)
-
-
-def stream_chat(message: str, user_id: str) -> str:
-    stream = client.chat.completions.create(
+def chat_completion(message: str, user_id: str, streaming: bool = False) -> str:
+    resp = client.chat.completions.create(
         messages=[
             {
                 "role": "user",
@@ -40,16 +19,17 @@ def stream_chat(message: str, user_id: str) -> str:
         ],
         model="gpt-3.5-turbo",
         user=user_id,
-        stream=True,
+        stream=streaming,
     )
-
-    text = ""
-    for chunk in stream:
-        for choice in chunk.choices:
-            print(f"{ choice = }")
-            if choice.delta.content:
-                text += choice.delta.content
-    return text
+    if streaming:
+        text = ""
+        for chunk in resp:
+            for choice in chunk.choices:
+                if choice.delta.content:
+                    text += choice.delta.content
+        return text
+    else:
+        return str(resp)
 
 
 def audio_speech(message: str, user_id: str) -> str:
