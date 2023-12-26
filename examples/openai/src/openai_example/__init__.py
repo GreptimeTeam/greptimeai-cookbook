@@ -13,7 +13,7 @@ async_client = AsyncOpenAI()
 openai_patcher.setup(client=async_client)
 
 
-def chat_completion(message: str, user_id: str, raw: bool, streaming: bool) -> str:
+def chat_completion(message: str, user_id: str, raw: bool, stream: bool) -> str:
     kwargs = {
         "messages": [
             {
@@ -23,7 +23,7 @@ def chat_completion(message: str, user_id: str, raw: bool, streaming: bool) -> s
         ],
         "model": "gpt-3.5-turbo",
         "user": user_id,
-        "stream": streaming,
+        "stream": stream,
     }
     if raw:
         raw_resp = client.with_raw_response.chat.completions.create(**kwargs)
@@ -31,7 +31,7 @@ def chat_completion(message: str, user_id: str, raw: bool, streaming: bool) -> s
     else:
         resp = client.chat.completions.create(**kwargs)
 
-    if streaming:
+    if stream:
         text = ""
         for chunk in resp:
             for choice in chunk.choices:
@@ -43,7 +43,7 @@ def chat_completion(message: str, user_id: str, raw: bool, streaming: bool) -> s
 
 
 async def async_chat_completion(
-    message: str, user_id: str, raw: bool, streaming: bool
+    message: str, user_id: str, raw: bool, stream: bool
 ) -> str:
     kwargs = {
         "messages": [
@@ -54,7 +54,7 @@ async def async_chat_completion(
         ],
         "model": "gpt-3.5-turbo",
         "user": user_id,
-        "stream": streaming,
+        "stream": stream,
     }
     if raw:
         raw_resp = await async_client.with_raw_response.chat.completions.create(
@@ -62,11 +62,11 @@ async def async_chat_completion(
         )
         resp = raw_resp.parse()
     else:
-        resp = await client.chat.completions.create(**kwargs)
+        resp = await async_client.chat.completions.create(**kwargs)
 
-    if streaming:
+    if stream:
         text = ""
-        for chunk in resp:
+        async for chunk in resp:
             for choice in chunk.choices:
                 if choice.delta.content:
                     text += choice.delta.content

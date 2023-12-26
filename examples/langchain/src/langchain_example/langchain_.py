@@ -25,8 +25,8 @@ logging.basicConfig(level=logging.DEBUG)
 callbacks = [GreptimeCallbackHandler()]
 
 
-def llm_chain(message: str, metadata: Dict[str, str], streaming: bool = False) -> str:
-    llm = OpenAI(streaming=streaming)
+def llm_chain(message: str, metadata: Dict[str, str], stream: bool = False) -> str:
+    llm = OpenAI(streaming=stream)
     prompt = PromptTemplate.from_template("{text}")
     runnable = prompt | llm
     return runnable.invoke(
@@ -35,7 +35,7 @@ def llm_chain(message: str, metadata: Dict[str, str], streaming: bool = False) -
     )
 
 
-def chat_chain(message: str, metadata: Dict[str, str], streaming: bool = False) -> str:
+def chat_chain(message: str, metadata: Dict[str, str], stream: bool = False) -> str:
     TEMPLATE = "You are a helpful assistant"
     system_message_prompt = SystemMessagePromptTemplate.from_template(TEMPLATE)
     HUMAN_TEMPLATE = "{text}"
@@ -46,7 +46,7 @@ def chat_chain(message: str, metadata: Dict[str, str], streaming: bool = False) 
     )
 
     chain = LLMChain(
-        llm=ChatOpenAI(streaming=streaming),
+        llm=ChatOpenAI(streaming=stream),
         prompt=chat_prompt,
         callbacks=callbacks,
     )

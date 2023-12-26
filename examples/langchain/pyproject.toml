@@ -9,7 +9,7 @@ dependencies = [
     "langchain>=0.0.352",
     "openai==1.2.0",
     "Flask>=3.0.0",
-    "greptimeai>=0.1.16",
+    "greptimeai>=0.1.17",
     "faiss-cpu>=1.7.4",
 ]
 readme = "README.md"
