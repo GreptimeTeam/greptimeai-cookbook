@@ -1,6 +1,6 @@
 from flask import Flask, request
-
-from langchain_example.langchains import agent_chain, callbacks, chat_chain, llm_chain
+from langchain_example.langchain_ import agent_chain, chat_chain, llm_chain
+from langchain_example.retrieval import retrieve
 
 app = Flask(__name__)
 
@@ -9,18 +9,19 @@ app = Flask(__name__)
 def langchain(scenario: str):
     json = request.json
     message = json.get("message", "")
-    streaming = json.get("streaming", False)
-    if not isinstance(streaming, bool):
-        streaming = bool(streaming)
+    stream = json.get("stream", False)
+    if not isinstance(stream, bool):
+        stream = bool(stream)
     metadata = {"user_id": json.get("user_id", "")}
+
     if scenario == "llm":
-        chain = llm_chain(streaming=streaming)
-        return chain.run(message, callbacks=callbacks, metadata=metadata)
+        return llm_chain(message, metadata=metadata, stream=stream)
     elif scenario == "agent":
-        return agent_chain().run(message, callbacks=callbacks, metadata=metadata)
+        return agent_chain(message, metadata=metadata)
+    elif scenario == "retrieval":
+        return retrieve(metadata)
     else:
-        chain = chat_chain(streaming=streaming)
-        return chain.run(message, callbacks=callbacks, metadata=metadata)
+        return chat_chain(message, metadata=metadata, stream=stream)
 
 
 if __name__ == "__main__":

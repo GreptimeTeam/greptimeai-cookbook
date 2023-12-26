@@ -2,7 +2,13 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-from openai_example import audio_speech, chat_completion
+from openai_example import (
+    async_chat_completion,
+    audio_speech,
+    chat_completion,
+    image_create,
+    tool_call,
+)
 
 
 @app.route("/openai/chat", methods=["POST"])
@@ -13,13 +19,38 @@ def chat():
 
     message: str = json.get("message", "")
     user_id: str = json.get("user_id", "")
-    streaming: bool = json.get("streaming", False)
+    stream: bool = json.get("stream", False)
+    raw: bool = json.get("raw", False)
+    return chat_completion(message, user_id, raw, stream)
 
-    return chat_completion(message, user_id, streaming)
+
+@app.route("/openai/async_chat", methods=["POST"])
+async def async_chat():
+    json = request.json
+    if not json:
+        return "No json body provided"
+
+    message: str = json.get("message", "")
+    user_id: str = json.get("user_id", "")
+    stream: bool = json.get("stream", False)
+    raw: bool = json.get("raw", False)
+
+    return await async_chat_completion(message, user_id, raw, stream)
+
+
+@app.route("/openai/tool_call", methods=["POST"])
+def tool():
+    json = request.json
+    if not json:
+        return "No json body provided"
+
+    user_id: str = json.get("user_id", "")
+
+    return tool_call(user_id)
 
 
 @app.route("/openai/audio/speech", methods=["POST"])
-def audio(scenario: str):
+def audio():
     json = request.json
     if not json:
         return "No json body provided"
@@ -28,6 +59,17 @@ def audio(scenario: str):
     user_id = json.get("user_id", "")
 
     return audio_speech(message, user_id)
+
+
+@app.route("/openai/image/create", methods=["POST"])
+def image():
+    json = request.json
+    if not json:
+        return "No json body provided"
+
+    user_id = json.get("user_id", "")
+
+    return image_create(user_id)
 
 
 if __name__ == "__main__":
