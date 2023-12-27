@@ -147,7 +147,9 @@ def tool_call(user_id: str) -> str:
         "tool_call_id": call_id,
     }
 
-    messages.append(assistant_message.model_dump())
+    assistant_message_dict = assistant_message.model_dump()
+    assistant_message_dict.pop("function_call", None)
+    messages.append(assistant_message_dict)
     messages.append(tool_message)
 
     resp = client.chat.completions.create(
