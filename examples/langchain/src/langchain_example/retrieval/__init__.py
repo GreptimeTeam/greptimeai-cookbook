@@ -1,5 +1,5 @@
+import os
 import random
-from os import path
 from typing import Dict
 
 from greptimeai.langchain.callback import GreptimeCallbackHandler
@@ -17,7 +17,8 @@ from langchain.vectorstores import FAISS
 # setup LangChain
 callbacks = [GreptimeCallbackHandler()]
 
-address_path = path.join(path.dirname(__file__), "state_of_the_union.txt")
+address_dir = os.getenv("ADDRESS_DIR") or os.path.dirname(__file__)
+address_path = os.path.join(address_dir, "state_of_the_union.txt")
 loader = TextLoader(address_path)
 documents = loader.load()
 text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
