@@ -36,19 +36,29 @@ Flask will listen on :8000, and you can use cURL to try:
 - chat
 
 ```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/chat -d '{"message":"give me a baby name", "user_id": "111", "streaming": False}'
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/chat \
+  -d '{"message":"give me a baby name", "user_id": "chat_user", "stream": false}'
 ```
 
 - llm
 
 ```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/llm -d '{"message":"give me a joke", "user_id": "222", "streaming": False}'
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/llm \
+  -d '{"message":"give me a joke", "user_id": "llm_user", "stream": false}'
 ```
 
 - agent
 
 ```shell
-curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/agent -d '{"message":"how many letters in the word open-source", "user_id": "333"}'
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/agent \
+  -d '{"message":"how many letters in the word open-source", "user_id": "agent_user"}'
+```
+
+- retrieval
+
+```shell
+curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8000/langchain/retrieval \
+  -d '{"user_id": "retrieval_user"}'
 ```
 
 ## Visit GreptimeAI Dashboard
