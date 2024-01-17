@@ -67,7 +67,7 @@ curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/au
 
 ```shell
 curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8001/openai/image/create \
-  -d '{"message":"how is everything going?", "user_id": "image_create_user"}'
+  -d '{"user_id": "image_create_user"}'
 ```
 
 ## Visit GreptimeAI Dashboard
