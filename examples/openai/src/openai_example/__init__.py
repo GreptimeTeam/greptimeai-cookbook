@@ -89,7 +89,7 @@ def audio_speech(message: str, user_id: str) -> str:
 
     resp.stream_to_file("audio_test.mp3")
 
-    return resp.json()
+    return resp.text
 
 
 def image_create(user_id: str) -> str:
